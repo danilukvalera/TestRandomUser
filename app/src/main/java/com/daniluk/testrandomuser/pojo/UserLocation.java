@@ -9,6 +9,10 @@ public class UserLocation {
         this.country = country;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     @SerializedName("city")
     @Expose
     private String city;

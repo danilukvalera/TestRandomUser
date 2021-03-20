@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
 import com.daniluk.testrandomuser.R;
+import com.daniluk.testrandomuser.UserActivity;
 import com.daniluk.testrandomuser.pojo.UserData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.daniluk.testrandomuser.api.ApiFactory.createLog;
 
 public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.UserHolder>{
     List<UserData> listUserData = new ArrayList<UserData>();
@@ -36,9 +39,14 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.User
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
-        holder.firstName.setText(listUserData.get(position).getName().getFirst());
-//        holder.lastName.setText(listUserData.get(position).getName().getLast());
-//        Picasso.get().load(listUserData.get(position).getPicture().getThumbnail()).into(holder.image);
+        try {
+            holder.firstName.setText(listUserData.get(position).getName().getFirst());
+            holder.lastName.setText(listUserData.get(position).getName().getLast());
+            Picasso.get().load(listUserData.get(position).getPicture().getThumbnail()).into(holder.image);
+        } catch (Exception e) {
+            createLog("Ошибка данных");
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -55,15 +63,12 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.User
         public UserHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.image = image;
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    //context.startActivity();
-                }
+            this.firstName = itemView.findViewById(R.id.itemFirstName);
+            this.lastName = itemView.findViewById(R.id.itemLastName);
+            this.image = itemView.findViewById(R.id.itemImage);
+            itemView.setOnClickListener(v -> {
+                Context context = v.getContext();
+                context.startActivity(UserActivity.getIntentForStartActivity(context, getAdapterPosition()));
             });
         }
     }

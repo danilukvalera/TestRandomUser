@@ -17,22 +17,35 @@ import retrofit2.Response;
 import static com.daniluk.testrandomuser.api.ApiFactory.createLog;
 
 public class UsersViewModel extends ViewModel {
+    private static UsersViewModel usersViewModel = null;
+    private int numberUsers = 20;
+
+    public static UsersViewModel getUsersViewModel() {
+        return usersViewModel;
+    }
+
+    public static void setUsersViewModel(UsersViewModel viewModel) {
+        if(usersViewModel == null){
+            usersViewModel = viewModel;
+        }
+    }
     private MutableLiveData<List<UserData>> listUsers;
 
     public LiveData<List<UserData>> getListUsers() {
         if (listUsers == null) {
             listUsers = new MutableLiveData<List<UserData>>();
-            loadUsers(20);
+            loadUsers(numberUsers);
         }
         return listUsers;
     }
+
 
 
     private void loadUsers(int numbers) {
         ApiFactory.createApiService().listUsersData(numbers).enqueue(new Callback<ListUsersData>() {
             @Override
             public void onResponse(Call<ListUsersData> call, Response<ListUsersData> response) {
-                createLog("Загрузка списка users успешна");
+                //createLog("Загрузка списка users успешна");
                 if (response.body() != null) {
                     List<UserData> users = response.body().getResults();
                     listUsers.setValue(users);

@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     //получить список Users
-    @GET("api/?results=20)")
+    @GET("api")
     //public Call<ListUsersData> listUsersData(
     public Call<ListUsersData> listUsersData(
             @Query("results") int results
