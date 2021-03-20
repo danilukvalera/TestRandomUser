@@ -21,11 +21,10 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        UsersViewModel viewModel = UsersViewModel.getUsersViewModel();
         TextView tvFirstName = findViewById(R.id.tvFirstName);
         TextView tvLastName = findViewById(R.id.tvLastName);
         TextView tvEmail = findViewById(R.id.tvEmail);
@@ -33,26 +32,31 @@ public class UserActivity extends AppCompatActivity {
         TextView tvCountry = findViewById(R.id.tvCountry);
         ImageView ivLargeImage = findViewById(R.id.ivLargeImage);
 
-        try {
-            int userPosition = getIntent().getIntExtra(USER_NUMBER, 0);
-            UserData user = viewModel.getListUsers().getValue().get(userPosition);
-            tvFirstName.setText(user.getName().getFirst());
-            tvLastName.setText(user.getName().getLast());
-            tvEmail.setText(user.getEmail());
-            tvCity.setText(user.getLocation().getCity());
-            tvCountry.setText(user.getLocation().getCountry());
 
-            Picasso.get().load(user.getPicture().getLarge()).into(ivLargeImage);
-        } catch (Exception e) {
-            createLog("Ошибка данных");
-            e.printStackTrace();
-        }
+
+                UsersViewModel.getUsersViewModel().getListUsers().observe(this, listUsers -> {
+            try {
+                int userPosition = getIntent().getIntExtra(USER_NUMBER, 0);
+                UserData user = UsersViewModel.getUsersViewModel().getListUsers().getValue().get(userPosition);
+                tvFirstName.setText(user.getName().getFirst());
+                tvLastName.setText(user.getName().getLast());
+                tvEmail.setText(user.getEmail());
+                tvCity.setText(user.getLocation().getCity());
+                tvCountry.setText(user.getLocation().getCountry());
+
+                Picasso.get().load(user.getPicture().getLarge()).into(ivLargeImage);
+            } catch (Exception e) {
+                createLog("Ошибка данных");
+                e.printStackTrace();
+            }
+        });
     }
 
-    public static Intent getIntentForStartActivity(Context context, int userPosition){
+    public static Intent getIntentForStartActivity(Context context, int userPosition) {
         Intent intent = new Intent(context, UserActivity.class);
         intent.putExtra(USER_NUMBER, userPosition);
         return intent;
     }
+
     public static String USER_NUMBER = "userNumber";
 }

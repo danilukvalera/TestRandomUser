@@ -6,21 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import com.daniluk.testrandomuser.adapters.ListUsersAdapter;
-import com.daniluk.testrandomuser.api.ApiFactory;
 import com.daniluk.testrandomuser.model.UsersViewModel;
-import com.daniluk.testrandomuser.pojo.ListUsersData;
-import com.daniluk.testrandomuser.pojo.UserData;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static com.daniluk.testrandomuser.api.ApiFactory.createLog;
 
 public class ListUsersActivity extends AppCompatActivity {
 
@@ -29,7 +17,7 @@ public class ListUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_users);
 
-        if(getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
@@ -40,6 +28,7 @@ public class ListUsersActivity extends AppCompatActivity {
 
         UsersViewModel viewModel = new ViewModelProvider(this).get(UsersViewModel.class);
         UsersViewModel.setUsersViewModel(viewModel);
+
         viewModel.getListUsers().observe(this, listUsers -> {
             adapter.setListUserData(listUsers);
         });

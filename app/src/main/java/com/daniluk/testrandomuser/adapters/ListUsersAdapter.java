@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
 
 import com.daniluk.testrandomuser.R;
 import com.daniluk.testrandomuser.UserActivity;
@@ -22,7 +21,7 @@ import java.util.List;
 import static com.daniluk.testrandomuser.api.ApiFactory.createLog;
 
 public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.UserHolder>{
-    List<UserData> listUserData = new ArrayList<UserData>();
+    List<UserData> listUserData = new ArrayList<>();
 
     public void setListUserData(List<UserData> listUserData) {
         this.listUserData = listUserData;
@@ -55,10 +54,10 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.User
     }
 
 
-    class UserHolder extends RecyclerView.ViewHolder{
-        private TextView firstName;
-        private TextView lastName;
-        private ImageView image;
+    static class UserHolder extends RecyclerView.ViewHolder{
+        private final TextView firstName;
+        private final TextView lastName;
+        private final ImageView image;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);

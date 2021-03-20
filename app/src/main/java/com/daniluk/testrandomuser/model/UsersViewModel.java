@@ -18,27 +18,27 @@ import static com.daniluk.testrandomuser.api.ApiFactory.createLog;
 
 public class UsersViewModel extends ViewModel {
     private static UsersViewModel usersViewModel = null;
-    private int numberUsers = 20;
+    private final int numberUsers = 20;
+
+    public UsersViewModel() {
+        loadUsers(numberUsers);
+    }
 
     public static UsersViewModel getUsersViewModel() {
         return usersViewModel;
     }
 
     public static void setUsersViewModel(UsersViewModel viewModel) {
-        if(usersViewModel == null){
             usersViewModel = viewModel;
-        }
     }
     private MutableLiveData<List<UserData>> listUsers;
 
     public LiveData<List<UserData>> getListUsers() {
         if (listUsers == null) {
-            listUsers = new MutableLiveData<List<UserData>>();
-            loadUsers(numberUsers);
+            listUsers = new MutableLiveData<>();
         }
         return listUsers;
     }
-
 
 
     private void loadUsers(int numbers) {
