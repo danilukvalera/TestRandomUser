@@ -11,10 +11,11 @@
 
     <ImageView
         android:id="@+id/ivLargeImage"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -28,14 +29,13 @@
         android:text="FirsrName"
         android:textColor="@color/color_text"
         android:textSize="36sp"
-        app:layout_constraintStart_toEndOf="@+id/ivLargeImage"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="LastName"
         android:textColor="@color/color_text"
         android:textSize="36sp"
@@ -46,11 +46,9 @@
         android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="EmailName"
         android:textColor="@color/color_text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvLabelName"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelName" />
 
@@ -58,10 +56,9 @@
         android:id="@+id/tvLabelCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Country:"
         android:textColor="@color/color_text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvLabelCity"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelCity" />
 
@@ -69,10 +66,10 @@
         android:id="@+id/tvLabelCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="City:"
         android:textColor="@color/color_text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvFirstName"
         app:layout_constraintTop_toBottomOf="@+id/tvLastName" />
 
@@ -83,7 +80,7 @@
         android:layout_marginStart="16dp"
         android:text="CityName"
         android:textColor="@color/color_text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tvLabelCity"
         app:layout_constraintTop_toTopOf="@+id/tvLabelCity" />
 
@@ -94,7 +91,7 @@
         android:layout_marginStart="16dp"
         android:text="CountryName"
         android:textColor="@color/color_text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tvLabelCountry"
         app:layout_constraintTop_toTopOf="@+id/tvLabelCountry" />
 
@@ -102,11 +99,17 @@
         android:id="@+id/tvLabelName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="E-mail:"
         android:textColor="@color/color_text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvLabelCountry"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelCountry" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
